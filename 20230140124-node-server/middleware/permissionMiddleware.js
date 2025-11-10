@@ -4,7 +4,7 @@ export const addUserData = (req, res, next) => {
 };
 
 export const checkAdmin = (req, res, next) => {
-  const user = { id: 99, nama: "Admin Utama", role: "admin" };
+  const user = { id: 99, nama: "admin utama", role: "admin" };
   req.user = user;
 
   if (user.role !== "admin") {

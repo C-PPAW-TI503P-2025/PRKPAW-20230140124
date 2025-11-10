@@ -1,13 +1,10 @@
-import express from "express";
-import { CheckIn, CheckOut } from "../controllers/presensiController.js";
-import { addUserData } from "../middleware/permissionMiddleware.js";
-
+const express = require('express');
 const router = express.Router();
-
+const presensiController = require('../controllers/presensiController');
+const { addUserData } = require('../middleware/permissionMiddleware');
 router.use(addUserData);
-
-
-router.post("/check-in", CheckIn);
-router.post("/check-out", CheckOut);
-
-export default router;
+router.post('/check-in', presensiController.CheckIn);
+router.post('/check-out', presensiController.CheckOut);
+router.put('/:id', presensiController.updatePresensi)
+router.delete('/:id', presensiController.deletePresensi)
+module.exports = router;

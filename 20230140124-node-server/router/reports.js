@@ -1,10 +1,12 @@
-import express from "express";
-import { getDailyReport } from "../controllers/reportController.js";
-import { checkAdmin } from "../middleware/permissionMiddleware.js";
-
+const express = require("express");
 const router = express.Router();
 
-router.use(checkAdmin);
-router.get("/daily", getDailyReport);
+const reportController = require("../controllers/reportController");
+const { checkAdmin, addUserData } = require("../middleware/permissionMiddleware");
 
-export default router;
+router.use(checkAdmin);
+
+router.get("/daily", reportController.getDailyReport);
+router.get("/by-date", [addUserData, checkAdmin], reportController.getDailyReportByDate);
+
+module.exports = router;
